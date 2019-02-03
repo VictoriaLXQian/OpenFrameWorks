@@ -1,7 +1,7 @@
 # OpenFrameworks_3DPrimitivesExample
 ## C++
-## This is summary of my assignment 2.
-## ![]()
+## This is my summary of the week.
+## ![](https://github.com/VictoriaLXQian/OpenFrameWorks/blob/master/Others/Module%203-6.png)
 A Short Description of What I did for Assignment 2:
 
 1. Play with "3DPrimitivesExample" using OpenFrameworks following the online instruction.
@@ -10,5 +10,5 @@ A Short Description of What I did for Assignment 2:
 
 Learning C++ is actually fun :)
 
-![](Assign2.gif)
+![](https://github.com/VictoriaLXQian/OpenFrameWorks/blob/master/Others/Assign2.gif)
     
