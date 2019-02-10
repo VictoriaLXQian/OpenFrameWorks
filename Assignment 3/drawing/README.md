@@ -14,10 +14,9 @@
 * Scene 2: One of the landscape of the journey; might include minor level of movement/ interaction
 * Scene 3: A close-up scene; will include movement
 
-![Screenshot](OpenFrameWorks/Others/projectNarrative.png)
+![Screenshot](https://github.com/VictoriaLXQian/OpenFrameWorks/blob/master/Others/projectNarrative.png)
 
-
-![Screenshot GIF](narrative.gif)
+![Screenshot GIF](https://github.com/VictoriaLXQian/OpenFrameWorks/blob/master/Others/narrative.gif)
 
 ## PROJECT 2: Weather
 
