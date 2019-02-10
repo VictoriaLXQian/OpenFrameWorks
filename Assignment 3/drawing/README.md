@@ -26,7 +26,7 @@
 * User Experience: LOW level of interaction; the experience is similar to a mobile weather app. 
 * Succeful Translation: Cohesive visual design
 
-![Screenshot of emptyExample](emptyExample.png)
+NOTES: the background will probably be a photo of the city updated from a searching engine/ some apps with similar function. (IDEALLY/ if possible)
 
 
 ## PROJECT 3: Game 
@@ -37,6 +37,21 @@
 * User Experience: MEDIUM level of interaction; This is an experience highly dependent on sound and color. 
 * Succeful Translation: Cohesive visual design; design and color; sound
 
-![Screenshot of emptyExample](emptyExample.png)
+#### Sketches:
+
+##### (Using Russian Letter "Я" as an example)
+
+* The background is a grid with different colors (hue, tone will be both different). 
+* Shapes with the same HUE = same instruments
+* Colors with the same tone (lightness) = same musical notes
+
+TWO WAYS TO CONNECT:
+
+* by COLOR, connect colors with the same tone
+* by SOUND, select each shape with the same musical notes
+
+NOTES: There will be movements and the game will have different levels. 
+
+![Sketches](https://github.com/VictoriaLXQian/OpenFrameWorks/blob/master/Others/gameSketch.png)
 
 
