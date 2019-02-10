@@ -14,7 +14,7 @@
 * Scene 2: One of the landscape of the journey; might include minor level of movement/ interaction
 * Scene 3: A close-up scene; will include movement
 
-![Screenshot](projectNarrative.png)
+![Screenshot](OpenFrameWorks/Others/projectNarrative.png)
 
 
 ![Screenshot GIF](narrative.gif)
