@@ -1,30 +1,43 @@
-# About emptyExample
+# Project Proposal
+
+## PROJECT 1: Narrative
+
+### This project intends to portray a narrative about journey. It tells a story of traveling, relocating and memories fading away. 
+
+* The Target User: ALL people.
+* User Experience: LOW level of interaction; the experience is like watching an animated illustration story. 
+* Succeful Translation: Cohesive visual design; design and color
+
+#### Example Scenes:
+
+* Scene 1: Seeing a person running through the train window; will include movement, the window and the person will move with a different speed. <This is the starting scene of the narrative.>
+* Scene 2: One of the landscape of the journey; might include minor level of movement/ interaction
+* Scene 3: A close-up scene; will include movement
+
+![Screenshot](projectNarrative.png)
+
+
+![Screenshot GIF](narrative.gif)
+
+## PROJECT 2: Weather
+
+### This is a weather app similar to a tranditional one, but with a better design. (High possible to change.)
+
+* The Target User: ALL people.
+* User Experience: LOW level of interaction; the experience is similar to a mobile weather app. 
+* Succeful Translation: Cohesive visual design
 
 ![Screenshot of emptyExample](emptyExample.png)
 
-### Learning Objectives
 
-This example is the simplest possible openFrameworks app! It does nothing. 
+## PROJECT 3: Game 
 
-...Well, *almost* nothing. Although it may not be apparent, the emptyExample activates all of the default system states. (For example, it sets the default fill color to white; it just doesn't happen to draw anything with it.)
+### Idea #1: This is a game designed to learn the basic characters/caligraphy for a language through musical sound. In another way, it can also train the user's absolute pitch by playing the game. Sound of different musical instruments will be differentiated by the color/shape of the design elements. Colors having the same level of lightness will sugget a successful completion of find the character, which will lead to a same-tune scale by different instruments and the direction of the shapes will indicate how to write. 
 
-The emptyExample is great for making sure that your openFrameworks development environment is compiling properly. It can also be useful as a "starter template" for making simple programs. 
+* The Target User: ALL people, especially for new language learners, people want to train their absolute pitch.
+* User Experience: MEDIUM level of interaction; This is an experience highly dependent on sound and color. 
+* Succeful Translation: Cohesive visual design; design and color; sound
 
-The emptyExample will help you understand what are the bare necessities of an openFrameworks program. In this regard, you can think of it as a "Hello World" for OF. 
+![Screenshot of emptyExample](emptyExample.png)
 
 
-### Expected Behavior
-
-When launching this app, you should see a light-gray screen. 
-
-* There's no interaction. 
-* There's nothing to see. 
-* That's it. 
-
-Instructions for using the app:
-
-* There's nothing to do. Move along.
-
-### Other classes used in this file
-
-This example uses no other classes.
