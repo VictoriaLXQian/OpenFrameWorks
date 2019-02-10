@@ -93,6 +93,23 @@ void ofApp::draw(){
         ofSetColor(255,247,249); // Light Pink
         ofDrawRectangle(555,295,70,120); //Photo 2
         ofDrawRectangle(410, 360, 100, 100); //Photo 3
+        ofSetColor(240, 168, 180); //Start to make a clock with a face.
+        ofDrawCircle(150, 150, 30);
+        ofSetColor(255, 255, 255);
+        ofDrawCircle(150, 150, 25);
+        ofSetColor(0, 0, 0);
+        ofDrawEllipse(142, 145, 8, 12); //Eye 1
+        ofDrawEllipse(158, 145, 8, 12); // Eye 2
+        ofSetColor(255, 255, 255);
+        ofDrawEllipse(142, 145, 7, 11); // 1
+        ofDrawEllipse(158, 145, 7, 11); // 2
+        ofSetColor(144, 130, 109);
+        ofDrawCircle(141, 145, 2); // 1
+        ofDrawCircle(157, 145, 2); // 2
+        ofDrawLine(150, 150, 150, 130);
+        ofDrawLine(150, 150, 157, 157);
+        ofSetColor(248, 150, 166);
+        ofDrawLine(145,165, 155, 165);
         
         
         
