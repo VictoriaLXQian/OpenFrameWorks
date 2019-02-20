@@ -4,4 +4,4 @@
 ![Emotion](https://github.com/VictoriaLXQian/OpenFrameWorks/blob/master/Others/emotion.gif)
 
 
-#### For this piece, it illustrate four emotion. The first emotion is happinnes, then sadness, then surprised, and followed by angry. 
+#### For this piece, it illustrates four different emotion. The first emotion is happinnes, then followed by sadness, surprised, and angry. 
