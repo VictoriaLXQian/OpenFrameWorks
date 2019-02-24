@@ -1,5 +1,5 @@
 # Emotion with Sound
-[![Watch the video](https://img.youtube.com/vi/fEmANumdkgQ/mqdedefault.jpg)](https://youtu.be/fEmANumdkgQ)
+[![Watch the video](https://img.youtube.com/vi/fEmANumdkgQ/maxresdefault.jpg)](https://youtu.be/fEmANumdkgQ)
 
 ### Click the preview to watch the video
 
