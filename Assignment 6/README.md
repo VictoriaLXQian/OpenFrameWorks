@@ -7,7 +7,7 @@
 
 3. Mouse press to see the final position of the heart.
 
-
+![STILL](still.jpg)
 ![LEFT/UP/RIGHT/DOWN](wasd.gif)
 ![MOVE](move.gif)
 ![HIDE](hide.gif)
