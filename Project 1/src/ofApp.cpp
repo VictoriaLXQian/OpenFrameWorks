@@ -31,13 +31,48 @@ float girlX, girlY;
 ofImage moonlight;
 float z,w;
 // stamp moving on the wall
+float stampTime;
 int direction;
 ofVec2f aus,chin,dank,fra,gre,hgr,ita,neth,pol;
 ofVec2f pic;
 Boolean pressA,pressC,pressD,pressF,pressG,pressH,pressI,pressN,pressP;
 ofImage stampAus,stampChin,stampDnmk,stampFra,stampGre,stampHgr,stampIta,stampNeth,stampPol;
+// snow scene
+snow ml0,ml1,ml2,ml3,ml4,ml5,ml6,ml7,ml8,ml9; // when using the instructor methods, drawing a new one just add the code wherever ml0 is called.
+float snowX, snowY;
 
 //--------------------------------------------------------------
+
+snow::snow(){
+    offsetX=ofRandom(-400, 500);
+    offsetY=ofRandom(-500, 500);
+}
+//int sec;
+void snow::setup(){  // why can't we load the image in the constructor?
+    snowflake.load("snow.png");
+}
+
+void snow::update(){
+    float time = ofGetElapsedTimef();
+    rX = ofSignedNoise(time * 0.05, time * 0.05, time * 0.05) * 400.0;  // rotate +- 400deg
+    // https://www.reddit.com/r/gamedev/comments/4y23pn/how_do_i_generate_deterministic_noise_that/
+    rY = ofSignedNoise(time * 0.03) * 400.0;
+    rZ = ofSignedNoise(time * 0.09) * 400.0;
+    offsetY += 0.2;
+    if (offsetY > ofGetHeight()){
+        offsetY = ofRandom(-500, -100);
+    }
+}
+void snow::draw(){
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()/2 + offsetX, ofGetHeight()/2 + offsetY);
+    ofScale(0.025, 0.025, 0.025);  // can be 3 dimensional
+    ofRotateX(rX);
+    ofRotateY(rY);
+    ofRotateZ(rZ);
+    snowflake.draw(0 - snowflake.getWidth()/2, 0 - snowflake.getHeight()/2);  // draw at new 0,0
+    ofPopMatrix();
+}
 void ofApp::setup(){
     ofSetFrameRate(60);
     ofSetCircleResolution(60);
@@ -49,7 +84,7 @@ void ofApp::setup(){
     posFm = ofVec2f(200,350);
     yTrain = midY;
     gillsans.load("gillsans.ttf", 14);
-    amaticr.load("amaticr.ttf", 20);
+    amaticr.load("amaticr.ttf", 19);
     
     // raindrop
     image.load("leavingNight.jpg");
@@ -116,7 +151,20 @@ void ofApp::setup(){
     neth = ofVec2f (700,50);
     pol = ofVec2f (0,0);
     
-
+//   -----------  Snow  ---------
+    snowX = midX;
+    snowY = midY;
+    ofSeedRandom();
+    ml0.setup();
+    ml1.setup();
+    ml2.setup();
+    ml3.setup();
+    ml4.setup();
+    ml5.setup();
+    ml6.setup();
+    ml7.setup();
+    ml8.setup();
+    ml9.setup();
 
 
 }
@@ -249,6 +297,19 @@ void ofApp::update(){
                 break;
         }
     }
+    
+//     ----------------  SNOW SCENE  --------------
+//    if (sec > )
+    ml0.update();
+    ml1.update();
+    ml2.update();
+    ml3.update();
+    ml4.update();
+    ml5.update();
+    ml6.update();
+    ml7.update();
+    ml8.update();
+    ml9.update();
 }
 void ofApp::opening(){
     ofBackground(0, 0, 0);
@@ -544,8 +605,44 @@ void ofApp::stampwall(){
     }
     if (pressP){
         pol = ofVec2f (400,45);
+//        stampTime = ofGetElapsedTimef();
+        cout << stampTime << endl;
     }
     
+}
+void ofApp::snow(){
+    ofBackground(179,196,193); //change a color as the building color
+    ofSetColor (86,51,13);
+    ofDrawRectangle(snowX-220, snowY - 250, 440, 286);
+    // window
+    ofSetColor(188,166,173);
+    ofDrawRectangle(snowX-200, snowY - 240, 400, 266);
+    
+    // window frame
+    ofSetColor (86,51,13);
+    ofDrawRectangle(snowX-200, snowY -107, 400, 4); //horizontal
+    ofDrawRectangle(snowX -75, snowY -240, 4, 266);
+    ofDrawRectangle(snowX +75, snowY -240, 4, 266);
+    ofSetColor(255, 255, 255);
+    ml0.draw();
+    ml1.draw();
+    ml2.draw();
+    ml3.draw();
+    ml4.draw();
+    ml5.draw();
+    ml6.draw();
+    ml7.draw();
+    ml8.draw();
+    ml9.draw();
+    ofSetColor(0, 0, 0);
+    amaticr.drawString("Some years later,", snowX - 430, snowY+100);
+    amaticr.drawString("in a gloomy afternoon，", snowX - 430, snowY+ 140);
+    amaticr.drawString("I had a dream.", snowX - 430, snowY+ 180);
+    amaticr.drawString("you were still there,", snowX - 430, snowY+ 220);
+    amaticr.drawString("at the station.", snowX - 430, snowY+ 260);
+    amaticr.drawString("The melody I had played", snowX - 225, snowY+ 100);
+    amaticr.drawString("was playing again.", snowX - 225, snowY+ 140);
+    amaticr.drawString("Nothing changed.", snowX - 225, snowY+ 180);
 }
 void ofApp::draw(){
     opening();
@@ -581,7 +678,12 @@ void ofApp::draw(){
     if (sec > 0){
         stampwall();
     }
-
+    if (pol == ofVec2f (400,45)){ // pol == ofVec2f (400,45)
+        snow();
+    }
+    if (sec > stampTime + 8){
+        amaticr.drawString("hello world", ofGetWidth()/2-200, ofGetHeight());
+    }
 }
 
 //--------------------------------------------------------------
@@ -598,7 +700,9 @@ void ofApp::keyPressed(int key){
     if(key == 'h') pressH = true;
     if(key == 'i') pressI = true;
     if(key == 'n') pressN = true;
-    if(key == 'p') pressP = true;
+    if(key == 'p')
+        pressP = true;
+        stampTime = ofGetElapsedTimef();
 
 }
 
