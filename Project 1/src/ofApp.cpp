@@ -48,7 +48,7 @@ void ofApp::setup(){
     rP = ofVec2f(650, 450);
     posFm = ofVec2f(200,350);
     yTrain = midY;
-    gillsans.load("gillsans.ttf", 20);
+    gillsans.load("gillsans.ttf", 14);
     amaticr.load("amaticr.ttf", 20);
     
     // raindrop
@@ -193,6 +193,60 @@ void ofApp::update(){
         yPos+=0.65;
         if (yPos > (ofGetHeight()/2+90)){
             yPos = midY;
+        }
+    }
+//    ----------  Stamp  --------------------
+    if (sec > 1.5){
+//        pic.x = ofMap(10, 0, 10, 670, 1200);
+        pic.y --;
+        switch (direction) {
+                
+            case 1:
+                aus.x--; //LEFT
+                chin.x--;
+                dank.x--;
+                fra.x--;
+                gre.x--;
+                hgr.x--;
+                ita.x--;
+                neth.x--;
+                pol.x--;
+                break;
+            case 2:
+                aus.y--; // UP
+                chin.y--;
+                dank.y--;
+                fra.y--;
+                gre.y--;
+                hgr.y--;
+                ita.y--;
+                neth.y--;
+                pol.y--;
+                break;
+            case 3:
+                aus.x++; //RIGHT
+                chin.x++;
+                dank.x++;
+                fra.x++;
+                gre.x++;
+                hgr.x++;
+                ita.x++;
+                neth.x++;
+                pol.x++;
+                break;
+            case 4:
+                aus.y++; //DOWN
+                chin.y++;
+                dank.y++;
+                fra.y++;
+                gre.y++;
+                hgr.y++;
+                ita.y++;
+                neth.y++;
+                pol.y++;
+                break;
+            default:
+                break;
         }
     }
 }
@@ -391,6 +445,106 @@ void ofApp::travel(){
     
 }
 void ofApp::stampwall(){
+    ofBackground(251,233,238);
+    ofSetColor (255, 255, 255);
+    ofDrawRectangle(pic.x-10,pic.y-10,160,200); // Portrait Photo Frame
+    photo.draw(pic);
+    photo.resize(140,180);
+    ofSetColor (0,0,0);
+    if (sec > 0 && sec < 8) {
+        amaticr.drawString("I started to forget,",midX-350, midY-270);
+    }
+    if (sec > 2 && sec < 8) {
+        amaticr.drawString("the face you,",midX-350, midY-220);
+    }
+    if (sec > 4 && sec < 8) {
+        amaticr.drawString("the imagery of home,",midX-350, midY-170);
+    }
+    if (sec > 6 && sec < 8) {
+        amaticr.drawString("and the life in that city.",midX-350, midY-120);
+    }
+    if (sec > 8 && sec < 12) {
+        gillsans.drawString("Use ARROW keys to move up, left, right, down.", midX-400, midY-270);
+        gillsans.drawString("Press the Initial Letter of the Origin (Country) of the Stamp", midX-400, midY-230);
+    }
+    
+    if (10 < sec){
+        ofSetColor (255,255,255,100);
+        ofDrawRectangle(600,200,170,170);
+        ofSetColor (255,255,255);
+        
+    }
+    if (12 < sec) {
+        stampAus.draw(aus.x,aus.y);
+        stampAus.resize(150, 150);
+    }
+    if (pressA){
+        aus = ofVec2f(610,210);
+    }
+    if (aus == ofVec2f(610,210)){
+        ofDrawRectangle(300, 500, 120, 170);
+        stampChin.resize(100,150);
+        stampChin.draw(chin.x,chin.y);
+    }
+    if (pressC){
+        chin = ofVec2f (310,510);
+    }
+    if (chin == ofVec2f (310,510)) {
+        ofDrawRectangle(200, 100, 170, 230);
+        stampDnmk.resize(150, 210);
+        stampDnmk.draw(dank.x, dank.y);
+    }
+    if (pressD){
+        dank = ofVec2f(210,110);
+    }
+    if (dank == ofVec2f(210,110)) {
+        ofDrawRectangle(50, 400, 150, 110);
+        stampFra.resize(140, 100);
+        stampFra.draw(fra.x, fra.y);
+    }
+    if (pressF) {
+        fra = ofVec2f (55,405);
+    }
+    if (fra == ofVec2f (55,405)) {
+        ofDrawRectangle(395, 280, 185, 130);
+        stampGre.resize(175, 120);
+        stampGre.draw(gre.x,gre.y);
+    }
+    if (pressG) {
+        gre = ofVec2f (400,285);
+    }
+    if (gre == ofVec2f (400,285)) {
+        ofDrawRectangle(700, 460, 160, 120);
+        stampHgr.resize(140, 100);
+        stampHgr.draw(hgr.x, hgr.y);
+    }
+    if (pressH) {
+        hgr = ofVec2f(710,470);
+    }
+    if (hgr == ofVec2f(710,470)) {
+        ofDrawRectangle(500, 450, 155, 260);
+        stampIta.resize(135, 240);
+        stampIta.draw(ita.x, ita.y);
+    }
+    if (pressI) {
+        ita = ofVec2f (510,460);
+    }
+    if (ita == ofVec2f (510,460)) {
+        ofDrawRectangle(218, 350, 160, 130);
+        stampNeth.resize(150, 120);
+        stampNeth.draw(neth.x, neth.y);
+    }
+    if (pressN) {
+        neth = ofVec2f (223,355);
+    }
+    if (neth == ofVec2f (223,355)) {
+        ofDrawRectangle(390, 35, 195, 160);
+        stampPol.resize(175, 140);
+        stampPol.draw(pol.x, pol.y);
+    }
+    if (pressP){
+        pol = ofVec2f (400,45);
+    }
     
 }
 void ofApp::draw(){
@@ -424,11 +578,27 @@ void ofApp::draw(){
     if (sec > 120){
         cry();
     }
+    if (sec > 0){
+        stampwall();
+    }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    if(key == OF_KEY_LEFT) direction = 1; //move left
+    if(key == OF_KEY_UP) direction = 2; //move up
+    if(key == OF_KEY_RIGHT) direction = 3; //move right
+    if(key == OF_KEY_DOWN) direction = 4; //move down
+    if(key == 'a') pressA = true;
+    if(key == 'c') pressC = true;
+    if(key == 'd') pressD = true;
+    if(key == 'f') pressF = true;
+    if(key == 'g') pressG = true;
+    if(key == 'h') pressH = true;
+    if(key == 'i') pressI = true;
+    if(key == 'n') pressN = true;
+    if(key == 'p') pressP = true;
 
 }
 

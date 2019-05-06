@@ -34,3 +34,20 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 };
+
+class snow {
+    ofImage snowflake;
+    
+    float rX = 0;
+    float rY = 0;
+    float rZ = 0;
+    
+    float offsetX, offsetY;
+    
+public:
+    snow();
+    void setup();
+    void update();
+    void draw();
+    
+};
