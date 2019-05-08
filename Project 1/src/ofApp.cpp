@@ -4,7 +4,7 @@ float midX, midY; // midpoint
 float barOne, barTwo; // train window-movement
 float yTrain;
 ofVec2f rP,posFm; //running person, the station name MOVEMENT
-ofTrueTypeFont gillsans,amaticr;
+ofTrueTypeFont gillsans,amaticr,title;
 float startX, startY; //RAINDROP MOVEMENT
 float picsizeX,picsizeY;
 float picX,picY;
@@ -40,6 +40,15 @@ ofImage stampAus,stampChin,stampDnmk,stampFra,stampGre,stampHgr,stampIta,stampNe
 // snow scene
 snow ml0,ml1,ml2,ml3,ml4,ml5,ml6,ml7,ml8,ml9; // when using the instructor methods, drawing a new one just add the code wherever ml0 is called.
 float snowX, snowY;
+// TRAIN LAST SCENE
+float lsceneOne, lsceneTwo;
+ofVec2f person, portaG;
+float increment;
+// landscape
+ofImage landscape;
+float landX;
+// final writing
+float wX, wY;
 
 //--------------------------------------------------------------
 
@@ -70,7 +79,8 @@ void snow::draw(){
     ofRotateX(rX);
     ofRotateY(rY);
     ofRotateZ(rZ);
-    snowflake.draw(0 - snowflake.getWidth()/2, 0 - snowflake.getHeight()/2);  // draw at new 0,0
+    snowflake.draw(0 - snowflake.getWidth()/2, 0 - snowflake.getHeight()/2);
+    // draw at new 0,0
     ofPopMatrix();
 }
 void ofApp::setup(){
@@ -83,9 +93,9 @@ void ofApp::setup(){
     rP = ofVec2f(650, 450);
     posFm = ofVec2f(200,350);
     yTrain = midY;
-    gillsans.load("gillsans.ttf", 14);
+    gillsans.load("gillsans.ttf", 20);
     amaticr.load("amaticr.ttf", 19);
-    
+    title.load("amaticrBold.ttf", 22);
     // raindrop
     image.load("leavingNight.jpg");
     raindrop.load("Raindrop.png");
@@ -129,6 +139,9 @@ void ofApp::setup(){
     xPosone = xPos;
     yPos = ofGetHeight()/2;
 
+    // landscape
+    landscape.load("Landscape_F.png");
+    landX = 0-ofGetWidth()*3;
     
     //stamp moving on the wall
     stampAus.load("austria.jpg");
@@ -165,7 +178,16 @@ void ofApp::setup(){
     ml7.setup();
     ml8.setup();
     ml9.setup();
-
+    
+//    ----------------------  Last Scene  --------------------
+    increment = 3;
+    person = ofVec2f(650, 450);
+    portaG = ofVec2f(200,350);
+    
+//    ----------------  Writing  -----------
+    wX = midX;
+    wY = ofGetHeight();
+    
 
 }
 
@@ -175,6 +197,7 @@ ofVec2f rpFinal;
 float dirt;
 void ofApp::update(){
     sec = ofGetElapsedTimef();
+    
 //    ----------- TRAIN ----------
     inc += 0.007;
     barOne -= inc;
@@ -231,20 +254,24 @@ void ofApp::update(){
 //    -----------  Cry Face  -----------------
     if (sec > 120){
         xPos-=0.5;
-        if (xPos < midX - 105){
-            xPos = midX;
+        if (xPos < girlX - 105){
+            xPos = girlX;
         }
         xPosone+=0.5;
-        if (xPosone > midX + 105){
-            xPosone = midX;
+        if (xPosone > girlX + 105){
+            xPosone = girlX;
         }
         yPos+=0.65;
         if (yPos > (ofGetHeight()/2+90)){
-            yPos = midY;
+            yPos = girlY;
         }
     }
+//    ----------  Landscape  ----------------
+    if (sec > 130){
+        landX +=3;
+    }
 //    ----------  Stamp  --------------------
-    if (sec > 1.5){
+    if (sec > 152){
 //        pic.x = ofMap(10, 0, 10, 670, 1200);
         pic.y --;
         switch (direction) {
@@ -299,7 +326,6 @@ void ofApp::update(){
     }
     
 //     ----------------  SNOW SCENE  --------------
-//    if (sec > )
     ml0.update();
     ml1.update();
     ml2.update();
@@ -310,14 +336,33 @@ void ofApp::update(){
     ml7.update();
     ml8.update();
     ml9.update();
+    
+//    -----------  Train LAST SCENE  -----------------
+    if (sec > 230){
+        increment -= 0.07;
+        lsceneOne -= increment;
+        lsceneTwo -= increment;
+        if (lsceneOne+50 > ofGetWidth()){
+            lsceneOne = midX - 1000;
+        }
+        if (lsceneTwo+50 > ofGetWidth()){
+            lsceneTwo =midX - 1000;
+        }
+    }
+    
+//    ----------  LAST SCENE  ---------------
+    if (sec > 242){
+        wY -=0.8;
+    }
+    
 }
 void ofApp::opening(){
     ofBackground(0, 0, 0);
     ofSetColor(255, 255, 255);
-    if (sec > 0.2) {
+    if (sec > 0) {
         amaticr.drawString("I always remember that day,", midX, midY);
     }
-    if (sec > 2){
+    if (sec > 1.5){
         amaticr.drawString("the day you were waving goodbye.", midX, midY+50);
     }
     if (sec > 3.5){
@@ -371,7 +416,10 @@ void ofApp::rain(){
     amaticr.drawString("in a rainy night.", midX-48, midY-100);
     }
     if (sec > 45){
-        amaticr.drawString("TITLE", midX-10, ofGetHeight()/3);
+        title.drawString("L'ultima Canzone", midX-60, ofGetHeight()/3); // l'ultima canzone
+    }
+    if (sec > 47){
+        amaticr.drawString("The Last Song", midX-40, ofGetHeight()/3+50);
     }
 }
 //--------------------------------------------------------------
@@ -476,34 +524,43 @@ void ofApp::allnight(){
     ofDrawRectangle(girlX-90, girlY +58, 180, 4); //horizontal
     ofDrawRectangle(girlX -35, girlY, 4, 120);
     ofDrawRectangle(girlX +35, girlY, 4, 120);
-    cout << w << endl;
 }
 void ofApp::cry(){
     ofBackground(0,0,0);
     ofSetColor(214, 225, 240);
-    ofDrawRectangle(midX-160, midY-90, 320, 180);
+    ofDrawRectangle(girlX-160, girlY-90, 320, 180);
     ofSetColor(253,234,182);
-    ofDrawCircle(midX, midY, 70);// Round Face + COLOR
+    ofDrawCircle(girlX, girlY, 70);// Round Face + COLOR
     ofSetColor(255, 255, 255);
-    ofDrawCircle(midX-28, midY-15, 21); //Left Eye Ball
-    ofDrawCircle(midX+28, midY-15, 21); //Right Eye Ball
+    ofDrawCircle(girlX-28, girlY-15, 21); //Left Eye Ball
+    ofDrawCircle(girlX+28, girlY-15, 21); //Right Eye Ball
     ofSetColor(0, 0, 0);
-    ofDrawCircle(midX-28, midY-15, 10.5); //Left Eye
-    ofDrawCircle(midX+28, midY-15, 10.5); //Right Eye
+    ofDrawCircle(girlX-28, girlY-15, 10.5); //Left Eye
+    ofDrawCircle(girlX+28, girlY-15, 10.5); //Right Eye
     ofSetLineWidth(1.5);
-    ofDrawLine(midX, midY+8, midX, midY+30); //Nose
-    ofDrawLine(midX-15, midY+40, midX+15, midY+40); // Mouth (The Neutral Face)
+    ofDrawLine(girlX, girlY+8, girlX, girlY+30); //Nose
+    ofDrawLine(girlX-15, girlY+40, girlX+15, girlY+40); // Mouth (The Neutral Face)
     ofSetColor(68, 178, 201);
     ofDrawEllipse(xFace-25, yPos-20, 6, 9);
     ofDrawEllipse(xFace-45, yPos-20, 6, 9);
     ofDrawEllipse(xFace+25, yPos-20, 6, 11);
     ofDrawEllipse(xFace+45, yPos-20, 6, 11);
-    ofDrawCircle(xPos-40, midY-15, 5);
-    ofDrawCircle(xPosone+40, midY-15, 5);
+    ofDrawCircle(xPos-40, girlY-15, 5);
+    ofDrawCircle(xPosone+40, girlY-15, 5);
+    ofSetColor(214, 225, 240);
 }
 
 void ofApp::travel(){
-    
+    ofBackground(0,0,0);
+    ofSetColor(255,255,255);
+    landscape.draw(landX, 0+ofGetHeight()*0.13);
+    landscape.resize(ofGetWidth()*3, ofGetHeight()*0.8);
+    ofSetColor(0,0,0);
+    ofDrawRectangle(0, 0, 1100, 100);
+    ofDrawRectangle(midX-410, 100, 50, 800); // bar one
+    ofDrawRectangle(midX+355, 100, 50, 800); // bar two
+    ofDrawRectangle(0, 700, 1100, 100);
+    ofDrawRectangle(0, 250, 1800, 5);
 }
 void ofApp::stampwall(){
     ofBackground(251,233,238);
@@ -512,30 +569,31 @@ void ofApp::stampwall(){
     photo.draw(pic);
     photo.resize(140,180);
     ofSetColor (0,0,0);
-    if (sec > 0 && sec < 8) {
-        amaticr.drawString("I started to forget,",midX-350, midY-270);
+    if (sec > 152 && sec < 160) {
+        amaticr.drawString("I started to forget,",girlX-350, girlY-270);
     }
-    if (sec > 2 && sec < 8) {
-        amaticr.drawString("the face you,",midX-350, midY-220);
+    if (sec > 154 && sec < 160) {
+        amaticr.drawString("the face you,",girlX-350, girlY-220);
     }
-    if (sec > 4 && sec < 8) {
-        amaticr.drawString("the imagery of home,",midX-350, midY-170);
+    if (sec > 156 && sec < 160) {
+        amaticr.drawString("the imagery of home,",girlX-350, girlY-170);
     }
-    if (sec > 6 && sec < 8) {
-        amaticr.drawString("and the life in that city.",midX-350, midY-120);
+    if (sec > 158 && sec < 160) {
+        amaticr.drawString("and the life in that city.",girlX-350, girlY-120);
     }
-    if (sec > 8 && sec < 12) {
-        gillsans.drawString("Use ARROW keys to move up, left, right, down.", midX-400, midY-270);
-        gillsans.drawString("Press the Initial Letter of the Origin (Country) of the Stamp", midX-400, midY-230);
+    if (sec > 160 && sec < 168) {
+        amaticr.drawString("Use ARROW keys to move up, left, right, down.", girlX-400, girlY-200);
+        amaticr.drawString("Press the Initial Letter of the Origin (Country) of the Stamp", girlX-400, girlY-150);
+        amaticr.drawString("Find out where I travelled to in 50s :)", girlX-400, girlY-100);
     }
     
-    if (10 < sec){
+    if (sec > 166){
         ofSetColor (255,255,255,100);
         ofDrawRectangle(600,200,170,170);
         ofSetColor (255,255,255);
         
     }
-    if (12 < sec) {
+    if (sec > 168) {
         stampAus.draw(aus.x,aus.y);
         stampAus.resize(150, 150);
     }
@@ -605,10 +663,8 @@ void ofApp::stampwall(){
     }
     if (pressP){
         pol = ofVec2f (400,45);
-//        stampTime = ofGetElapsedTimef();
         cout << stampTime << endl;
     }
-    
 }
 void ofApp::snow(){
     ofBackground(179,196,193); //change a color as the building color
@@ -617,7 +673,6 @@ void ofApp::snow(){
     // window
     ofSetColor(188,166,173);
     ofDrawRectangle(snowX-200, snowY - 240, 400, 266);
-    
     // window frame
     ofSetColor (86,51,13);
     ofDrawRectangle(snowX-200, snowY -107, 400, 4); //horizontal
@@ -644,7 +699,38 @@ void ofApp::snow(){
     amaticr.drawString("was playing again.", snowX - 225, snowY+ 140);
     amaticr.drawString("Nothing changed.", snowX - 225, snowY+ 180);
 }
+void ofApp::station(){
+    ofBackground(255,255,255);
+    if (sec > 232){
+        ofSetColor(0,0,0);
+        ofDrawRectangle(0, 0, 1100, 100);
+        ofDrawRectangle(lsceneOne, 100, 50, 800); // bar one
+        ofDrawRectangle(lsceneTwo, 100, 50, 800); // bar two
+        ofDrawRectangle(0, 700, 1100, 100);
+        ofDrawRectangle(0, 250, 1800, 20);
+        ofSetLineWidth(4);
+        ofDrawLine(0, 550, 1700, 550); // Drawing the frame of the window
+    }
+    if (sec > 238){
+        ofSetColor(0, 0, 0);
+        ofDrawRectangle(portaG, 230, 60);//Station Name
+        ofDrawEllipse(person, 30, 36);
+        ofDrawRectangle(person.x-10, person.y+18, 20, 40);
+        ofSetLineWidth(7);
+        ofDrawLine(portaG.x+60, portaG.y+60, portaG.x+60, 535);
+        ofDrawLine(portaG.x+170, portaG.y+60, portaG.x+170, 535);
+        ofDrawLine(person.x-5, person.y+58, person.x-12, person.y+100);
+        ofDrawLine(person.x+4, person.y+58, person.x+4, person.y+98);
+        ofSetLineWidth(5);
+        ofDrawLine(person.x-10, person.y+25, person.x-16, person.y+68);
+        ofDrawLine(person.x+10, person.y+22, person.x+18, person.y+45);
+        ofDrawLine(person.x+18, person.y+45, person.x+22, person.y+15);
+        ofSetColor(255, 255, 255);
+        gillsans.drawString("M. P.ta GARIBALDI", portaG.x+8, portaG.y+40);
+    }
+}
 void ofApp::draw(){
+    cout << sec << endl;
     opening();
     train();
     rain();
@@ -659,8 +745,20 @@ void ofApp::draw(){
     }
     if (sec > 66){
     brokenheart();
-        if (sec > 80) {
-            amaticr.drawString("I miss", ofGetWidth()/2-10, ofGetHeight()/2);
+        if (sec > 79) {
+            amaticr.drawString("I miss", ofGetWidth()/2-15, ofGetHeight()/2-40);
+        }
+        if (sec > 81.5){
+            amaticr.drawString("The red wall in my room.", ofGetWidth()/2-75, ofGetHeight()/2);
+        }
+        if (sec > 84.5){
+            amaticr.drawString("The sound of the moka pot in the morning.", ofGetWidth()/2-135, ofGetHeight()/2+40);
+        }
+        if (sec > 87){
+            title.drawString("......", ofGetWidth()/2-15, ofGetHeight()/2+80);
+        }
+        if (sec > 87.5){
+            amaticr.drawString("I miss home.", ofGetWidth()/2-30, ofGetHeight()/2+120);
         }
     }
     if (sec > 90){
@@ -669,21 +767,44 @@ void ofApp::draw(){
     if (sec > 105){
         allnight();
         if (sec > 108){
-            amaticr.drawString("And now, standing ,looking at the moon, thinking of my distant home", ofGetWidth()/2-200, ofGetHeight());
+            amaticr.drawString("And now, standing ,looking at the moon, thinking of my distant home", ofGetWidth()/2-200, ofGetHeight()-80);
         }
     }
     if (sec > 120){
         cry();
     }
-    if (sec > 0){
+    if (sec > 126){
+        amaticr.drawString("I left this empty room. On the journey agian.", ofGetWidth()/2-150, ofGetHeight()-80);
+    }
+    if (sec > 130){
+        travel();
+    }
+    if (sec > 152){
         stampwall();
     }
-    if (pol == ofVec2f (400,45)){ // pol == ofVec2f (400,45)
+    if (sec > 222){
         snow();
     }
-    if (sec > stampTime + 8){
-        amaticr.drawString("hello world", ofGetWidth()/2-200, ofGetHeight());
+    if (sec > 230){
+        station();
     }
+    if (sec > 242){
+        // writing
+        ofBackground(0, 0, 0);
+        ofSetColor(255, 255, 255);
+        amaticr.drawString("After almost three years,", wX-75, wY-100);
+        amaticr.drawString("I went back to Milano.", wX-70, wY-60);
+        amaticr.drawString("I forgot how to use the keys.", wX-85, wY);
+        amaticr.drawString("I took the wrong train back home.", wX-108, wY+40);
+        amaticr.drawString("I forgot the 'secret' roads to walk around in the center.", wX-180, wY+80);
+        amaticr.drawString("The bakery shop I used to go in the morning was gone.", wX-165, wY+120);
+        amaticr.drawString("But,", wX-15, wY+180);
+        amaticr.drawString("when I heard my host mom saying", wX-100, wY+220);
+        amaticr.drawString("'Home is always home. Nothing changes too much.'", wX-155, wY+260);
+        amaticr.drawString("I knew I was at home.", wX-65, wY+300);
+        title.drawString("HOME IS ALWAYS HOME.", wX-70, wY+380);
+    }
+    
 }
 
 //--------------------------------------------------------------
@@ -700,9 +821,8 @@ void ofApp::keyPressed(int key){
     if(key == 'h') pressH = true;
     if(key == 'i') pressI = true;
     if(key == 'n') pressN = true;
-    if(key == 'p')
-        pressP = true;
-        stampTime = ofGetElapsedTimef();
+    if(key == 'p') pressP = true;
+//        stampTime = ofGetElapsedTimef();
 
 }
 
