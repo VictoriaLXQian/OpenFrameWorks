@@ -1,9 +1,9 @@
 # Project 2_Weather API
 
-[![Watch the video](https://img.youtube.com/vi/7xyphbqZK8k/maxresdefault.jpg)](
-https://youtu.be/7xyphbqZK8k)
+[![Watch the video](https://img.youtube.com/vi/wIB7Fg-Ykx8/maxresdefault.jpg)](
+https://youtu.be/wIB7Fg-Ykx8)
 
-#### This is a project using JSON weather data from darksky API. This piece visualizes the temperature(in Celsius) and UV index of five cities based on my travel frequency. This is served as a personalized weather app to help myself pack more efficient.     
+#### This is a project using JSON weather data with darksky API. This piece visualizes the temperature(in Celsius) and UV index of five cities based on my travel frequency. This is served as a personalized weather app to help myself pack more efficient.     
 
 1. Temperature in Celsius. The screen is scale from 0 to 50 degree. 
 2. Using lowest and highest temperature of the day to plot a temperature line. It is easy to tell the temperature difference in spite of the high and low of the day.

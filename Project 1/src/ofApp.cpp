@@ -49,6 +49,7 @@ ofImage landscape;
 float landX;
 // final writing
 float wX, wY;
+ofSoundPlayer sound;
 
 //--------------------------------------------------------------
 
@@ -86,6 +87,7 @@ void snow::draw(){
 void ofApp::setup(){
     ofSetFrameRate(60);
     ofSetCircleResolution(60);
+    sound.load("Audio.wav");
     midX = ofGetWidth() / 2;
     midY = ofGetHeight() / 2;
     barOne = midX - 300;
@@ -195,8 +197,13 @@ void ofApp::setup(){
 float inc = 0.5;
 ofVec2f rpFinal;
 float dirt;
+float musictime;
 void ofApp::update(){
     sec = ofGetElapsedTimef();
+    musictime = ofGetFrameNum();
+    if (musictime == 0){
+    sound.play();
+    }
     
 //    ----------- TRAIN ----------
     inc += 0.007;
