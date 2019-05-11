@@ -42,8 +42,8 @@ This is a game about training your ears to have perfect pitch. This game include
 https://youtu.be/pydfspzMf_I)
 
 
-#### Credit List
+## Credit List
 
-Music Notes (Guitar) - Played and Recorded by me
-Music Notes (Cello) - Played and Recorded by a dear friend, Zeta Gao
+1. Music Notes (Guitar) - Played and Recorded by me
+2. Music Notes (Cello) - Played and Recorded by a dear friend, Zeta Gao
 
