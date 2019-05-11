@@ -12,14 +12,14 @@ ofTrueTypeFont scoreFont,text,worLose,regNotes; // title using Amaticr
 ofSoundPlayer la;
 ofSoundPlayer xi;
 ofSoundPlayer xiLow;
-ofSoundPlayer duo;
+ofSoundPlayer duo, duoCello;
 ofSoundPlayer rui;
 ofSoundPlayer ruiLow;
-ofSoundPlayer mi;
-ofSoundPlayer fa;
+ofSoundPlayer mi, miCello;
+ofSoundPlayer fa, faCello;
 ofSoundPlayer soHigh;
 ofSoundPlayer so;
-ofSoundPlayer playlist[10]={la,xi,xiLow,duo,rui,ruiLow,mi,fa,so,soHigh};
+ofSoundPlayer playlist[13]={la,xi,xiLow,duo,rui,ruiLow,mi,fa,so,soHigh,duoCello,miCello,faCello};
 bool pressOne, pressTwo, pressTre, pressFour, pressFive, pressSix, pressSeven;
 bool pressA, pressB, pressC, pressD, pressE, pressF, pressG, pressAny;
 bool one, two, three, four, five, six, seven, any;
@@ -47,8 +47,8 @@ void note::update(){
     rX = ofSignedNoise(time*0.05, time*0.05,time*0.05)*400.0;
     rY = ofSignedNoise(time*0.03)*400.0;
     rZ = ofSignedNoise(time*0.09)*400.0;
-    offsetX += 0.7;
-    offsetY += 0.5;
+    offsetX += 0.1;
+    offsetY += 0.07;
 }
 
 void note::draw(){
@@ -74,10 +74,13 @@ void ofApp::setup(){
     xi.load("b.mp3");
     xiLow.load("bLow.mp3");
     duo.load("c.mp3");
+    duoCello.load("cello C.m4a");
     rui.load("d.mp3");
     ruiLow.load("dLow.mp3");
     mi.load("e.mp3");
+    miCello.load("cello E.m4a");
     fa.load("f.mp3");
+    faCello.load("cello F.m4a");
     so.load("g.mp3");
     soHigh.load("gHigh.mp3");
     noteH.load("noteOne.png");
@@ -91,8 +94,8 @@ void ofApp::setup(){
     note7.setup();
     circleO = ofVec2f(0,0);
     circleT = ofVec2f(ofGetScreenWidth(),ofGetScreenHeight());
-    velO = ofVec2f(ofRandom(-15,15),ofRandom(-15,15));
-    velT = ofVec2f(ofRandom(-17,17),ofRandom(-17,17));
+    velO = ofVec2f(ofRandom(-10,10),ofRandom(-10,10));
+    velT = ofVec2f(ofRandom(-13,13),ofRandom(-13,13));
     f = 0;
 }
 int i = 0;
@@ -153,9 +156,9 @@ void ofApp::update(){
     }
     pxDistance = sqrt(pow((circleOcenter.x-circleTcenter.x),2)+pow((circleOcenter.y-circleTcenter.y), 2));
     if (i > 1){
-        if (pxDistance > 420 && pxDistance <= 1000) {
-            velO.rotate(ofRandom(-50,50));
-            velT.rotate(ofRandom(-35,35));
+        if (pxDistance > 420 && pxDistance <= 700) {
+            velO.rotate(ofRandom(-80,80));
+            velT.rotate(ofRandom(-70,70));
         }else if (pxDistance <= 420 && (circleOa == true || circleTa == true)){
             circleTa = false;
             circleOa =false;
@@ -163,7 +166,7 @@ void ofApp::update(){
         }
     }
     //---------------------------------------     game page     ------------------------------
-    k = ofRandom(0, 9);
+    k = ofRandom(0, 12);
     
     note1.update();
     note2.update();
@@ -189,14 +192,14 @@ void ofApp::update(){
 //    }
     if (g==2){
         g = 1;
+        f ++;
         youwin = false;
         youlose = false;
-        f ++;
     }
     if (g == 3){
         g = 1;
-        youlose = false;
         f --;
+        youlose = false;
     }
     
 }
@@ -371,6 +374,32 @@ void ofApp::lose(){
     ofDrawRectangle(350, ofGetScreenHeight()/2 - 150, 1000, 220);
     ofSetColor(255, 0, 0);
     worLose.drawString("N O P E :(", 400, ofGetScreenHeight()/2+20);
+    string notes;
+    if (pressOne){
+        notes = "C";
+    }
+    if (pressTwo){
+        notes = "D";
+    }
+    if (pressTre){
+        notes = "E";
+    }
+    if (pressFour){
+        notes = "F";
+    }
+    if (pressFive){
+        notes = "G";
+    }
+    if (pressSix){
+        notes = "A";
+    }
+    if (pressSeven){
+        notes = "B";
+    }
+    if (pressAny){
+        notes = "NOT TUNED";
+    }
+    scoreFont.drawString(notes, ofGetScreenWidth()-300, 160);
 }
 
 void ofApp::draw(){
@@ -399,57 +428,20 @@ void ofApp::draw(){
         if (youwin){
             win();
             g = 2;
-//            youwin = false;
+            f ++;
+            youwin = false;
         }
         if (youlose){
             lose();
             g = 3;
-//            youlose = false;
+            f --;
+            youlose = false;
         }
         
         ofSetColor(white);
         string score = ofToString (f);
         scoreFont.drawString(score, 137, 160);
-        string notes;
-        if (youlose && one){
-            notes = "C";
-        }else if (youlose && two){
-            notes = "D";
-        }else if (youlose && three){
-            notes = "E";
-        }else if (youlose && four){
-            notes = "F";
-        }else if (youlose && five){
-            notes = "G";
-        }else if (youlose && six){
-            notes = "A";
-        }else if (youlose && seven){
-            notes = "B";
-        }else if (youlose && any){
-            notes = "NOT TUNED";
-        }
-        scoreFont.drawString(notes, ofGetScreenWidth()-137, 160);
-//        if (youlose){
-//            string notes;
-//            if (one){
-//                notes = "C";
-//            }else if (two){
-//                notes = "D";
-//            }else if (three){
-//                notes = "E";
-//            }else if (four){
-//                notes = "F";
-//            }else if (five){
-//                notes = "G";
-//            }else if (six){
-//                notes = "A";
-//            }else if (seven){
-//                notes = "B";
-//            }else if (any){
-//                notes = "NOT TUNED";
-//            }
-//            scoreFont.drawString(notes, ofGetScreenWidth()-137, 160);
-//        }
+
 //        ------------------------------------  PRESS RETURN KEY TO RESTART  --------------------------------------------
     }
     //*************************************************    GAME Page    ************************************************
@@ -549,6 +541,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    k = ofRandom(0,12);
     if (ofInRange(x, 0, ofGetScreenWidth())) startX = true;
     if (ofInRange(y, 0, ofGetScreenHeight())) startY = true;
     if (startX&&startY) currentSec = ofGetElapsedTimef();
@@ -559,10 +552,10 @@ void ofApp::mousePressed(int x, int y, int button){
     cout << k << endl;
     if (k==0)pressSix = true;
     if (k==1)pressSeven = true;
-    if (k==3)pressOne=true;
+    if (k==3 || k==10)pressOne=true;
     if (k==4)pressTwo = true;
-    if (k==6)pressTre = true;
-    if (k==7)pressFour = true;
+    if (k==6 || k==11)pressTre = true;
+    if (k==7 || k==12)pressFour = true;
     if (k==8)pressFive = true;
     if (k==2 || k == 5 || k == 9)pressAny = true;
 }
