@@ -65,10 +65,10 @@ Fantaisie Impromptu in the background. This is the piece I played for my host fa
 
 Recorded and Played by me.
 
-Españoletas, Guitar
-Moonlight Sonata (Beethoven), Piano
-Fantaisie Impromptu (Chopin), Piano 
-Air on the G String (Bach), Piano
+1. Españoletas, Guitar
+2. Moonlight Sonata (Beethoven), Piano
+3. Fantaisie Impromptu (Chopin), Piano 
+4. Air on the G String (Bach), Piano
 
 
 
