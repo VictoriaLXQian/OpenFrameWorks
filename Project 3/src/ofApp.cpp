@@ -74,13 +74,13 @@ void ofApp::setup(){
     xi.load("b.mp3");
     xiLow.load("bLow.mp3");
     duo.load("c.mp3");
-    duoCello.load("cello C.m4a");
+    duoCello.load("cello C.mp3");
     rui.load("d.mp3");
     ruiLow.load("dLow.mp3");
     mi.load("e.mp3");
-    miCello.load("cello E.m4a");
+    miCello.load("cello E.mp3");
     fa.load("f.mp3");
-    faCello.load("cello F.m4a");
+    faCello.load("cello F.mp3");
     so.load("g.mp3");
     soHigh.load("gHigh.mp3");
     noteH.load("noteOne.png");
