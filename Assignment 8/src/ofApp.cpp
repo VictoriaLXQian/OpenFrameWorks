@@ -13,7 +13,7 @@ float tempHigh,tempLow,tempRatio;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    std::string url = "https://api.darksky.net/forecast/352dc2df4f80b08a0b3d0b71250b3b7/45.4642,9.1900";
+    std::string url = "https://api.darksky.net/forecast/your API Key/45.4642,9.1900";
     bool parsingSuccessful = json.open(url);
     
     if (parsingSuccessful)
